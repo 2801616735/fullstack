@@ -5,6 +5,36 @@
     <title>07表单绑定</title>
 </head>
 <body>
-
+<div id="app">
+    <input type="text" v-model="myText"/>
+    result:{{myText}}
+    <textarea v-model="myText"></textarea>
+    <br/>
+    <input type="checkbox" v-model="isChecked"/>记录名称
+    <p>
+        你喜欢的运动:
+        <input type="checkbox" v-model="checkArr" value="游泳"/>游泳
+        <input type="checkbox" v-model="checkArr" value="足球"/>足球
+        <input type="checkbox" v-model="checkArr" value="篮球"/>篮球
+        {{checkArr}}
+    </p>
+    <p>
+        性别:
+        <input type="radio" v-model="isRadio" value="男" id="man"/><label for="man">男</label> <input type="radio" v-model="isRadio" value="女" id="women"/><label for="women">女</label>
+        {{isRadio}}
+    </p>
+</div>
 </body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            myText: "",
+            isChecked:false,
+            checkArr:[],
+            isRadio:""
+        }
+    });
+</script>
 </html>
