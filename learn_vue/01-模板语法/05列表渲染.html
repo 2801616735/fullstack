@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05列表渲染</title>
+</head>
+<body>
+<div id="app">
+    <div>数组写法1-不获取索引</div>
+    <ul>
+        <li v-for="data in dataList">{{data}}</li>
+    </ul>
+    <div>数组写法2-获取索引</div>
+    <ul>
+        <li v-for="(data,index) in dataList">{{index}}--{{data}}</li>
+    </ul>
+    <div>对象写法1-不获取索引</div>
+    <ul>
+        <li v-for="data in dataObj">{{data}}</li>
+    </ul>
+    <div>对象写法2-获取索引</div>
+    <ul>
+        <li v-for="(data,index) in dataObj">{{index}}--{{data}}</li>
+    </ul>
+    <div>列表过滤应用</div>
+    <input type="text" @input="handleClick();" v-model="myText"/>
+    <ul>
+        <li v-for="data in dataListTwo">{{data}}</li>
+    </ul>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            myText:"",
+            dataList:['111111','222222','333333'],
+            dataObj:{
+                "name":'xiaobei',
+                "info":'php'
+            },
+            dataListTwo:["aaa",'bbb','aabb','dddd'],
+            dataListTwoBak:[],
+            List:["aaa",'bbb','aabb','dddd'],
+        },
+        methods:{
+            handleClick:function() {
+                // console.log(this.myText)// 获取输入框的内容
+                // 方式1
+                // if (this.dataListTwoBak.length==0) {
+                //     this.dataListTwoBak = this.dataListTwo;
+                // }
+                // else {
+                //     this.dataListTwo = this.dataListTwoBak;
+                // }
+                // var myText = this.myText;
+                // var newList = this.dataListTwo.filter(item=>item.indexOf(this.myText)>-1)
+                // this.dataListTwo = newList;
+                // 方式2
+                var myText = this.myText;
+                var newList = this.List.filter(item=>item.indexOf(this.myText)>-1)
+                this.dataListTwo = newList;
+            }
+        }
+    });
+</script>
+</html>

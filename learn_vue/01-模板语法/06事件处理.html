@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06事件处理</title>
+</head>
+<body>
+<div id="app">
+    <div>不需要传递参数</div>
+    <button @click="handleClick();">按钮1</button>
+    <button @click="handleClick2">按钮2</button>
+    <button @click="isShow=!isShow">按钮3</button>
+    <div v-show="isShow">hello world.</div>
+    <div>冒泡事件1</div>
+    <ul @click="handelUlClick();">
+        <li @click="handelLiClick1($event);">111111</li>
+        <li @click.stop="handelLiClick2($event);">222222</li>
+        <li @click="handelLiClick3($event);">333333</li>
+    </ul>
+    <div>冒泡事件2</div>
+    <ul @click.self="handelUlClick();">
+        <li @click="handelLiClick3($event);">333333</li>
+        <li @click.once="handelLiClick3($event);">333333</li>
+    </ul>
+    <div>标签a的默认行为</div>
+    <a target="_blank" href="http://www.baidu.com" @click="handelA1Click">标签a1</a><br/>
+    <a target="_blank" href="http://www.baidu.com" @click="handelA2Click($event)">标签a2</a><br/>
+    <a target="_blank" href="http://www.baidu.com" @click.prevent="handelA3Click">标签a3</a><br/>
+    <div>按键事件</div>
+    <input type="text" @keyup="handelKeyup1($event)"/><br/>
+    <input type="text" @keyup.enter="handelKeyup2($event)"/><br/>
+    <input type="text" @keyup.13="handelKeyup2($event)"/><br/>
+</div>
+<a target="_blank" href="http://www.baidu.com" onclick="func(this.href);">djkljf</a>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            isShow:true
+        },
+        methods:{
+            handleClick(){
+                this.isShow = !this.isShow;
+            },
+            handleClick2:function(){
+                this.isShow = !this.isShow;
+            },
+            handelUlClick(e) {
+                console.log("handelUlClick",e)
+            },
+            handelLiClick1(e){
+                e.stopPropagation(); // 阻止冒泡
+                console.log("handelLiClick",e)
+            },
+            handelLiClick2(e){
+                console.log("handelLiClick",e)
+            },
+            handelLiClick3(e){
+                console.log("handelLiClick",e)
+            },
+            handelA1Click(){
+                console.log("handelA1Click")
+            },
+            handelA2Click(ev){
+                ev.preventDefault(); // 阻止默认行为
+                console.log("handelA2Click")
+            },
+            handelA3Click(){
+                console.log("handelA3Click")
+            },
+            handelKeyup1(ev){
+                if (ev.keyCode==13) {
+                    console.log("回车键按键")
+                }
+            },
+            handelKeyup2(ev){
+                console.log("回车键按键")
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03class</title>
+    <style>
+        .red{ color: red;}
+        .yellow{ color: yellow;}
+    </style>
+</head>
+<body>
+<div id="app">
+    <p :class="isActive?'red':'yellow'">动态绑定class写法1.</p>
+    <p :class="classObj">动态绑定class写法2.</p>
+    <p :class="classArr">动态绑定class写法3.</p>
+    <p :style="'background:'+'red'">动态绑定style</p>
+    <p :style="'background:'+(isActive?'red':'yellow')">动态绑定style</p>
+    <p :style="styleObj">动态绑定style对象写法</p>
+    <p v-bind:style="styleArr">动态绑定style对象写法</p>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            isActive:true,
+            classObj:{
+                red:true,
+                yellow:false
+            },
+            classArr:["red","yellow"],
+            styleObj:{
+                background:"red"
+            },
+            styleArr:[{
+                background:"red"
+            }]
+        }
+    });
+</script>
+</html>

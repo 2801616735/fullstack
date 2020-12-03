@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02if-show</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <p v-if="p1">I am a p1.</p>
+    <p>I am a p2.</p>
+    <p v-show="p3">I am a p3.</p>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data: {
+            p1:true,
+            p3:true
+        }
+    });
+</script>
+</html>
+<!--if在变量设置为false后，会删除对应的元素-->
+<!--而show只是加了隐藏-->

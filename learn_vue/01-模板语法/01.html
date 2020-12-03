@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    <div id="box">
+        {{ 10+20 }}
+        {{ 10>20?'aaa':'bbb'}}  // 之所以需要单引号，与变量进行区分
+        {{myName}}
+        {{myHtml}}
+        <div v-html="myHtml"></div>
+    </div>
+</body>
+<script>
+    var box = new Vue({
+        el:"#box",
+        data:{
+            myName:"xiaobei",
+            myHtml:"<b>xiaobei</b>"
+        }
+    });
+</script>
+</html>

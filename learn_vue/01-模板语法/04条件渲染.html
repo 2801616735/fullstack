@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <button @click="handleClick()">点击</button>
+    <p v-if="isCreated">动态创建和删除1111</p>
+    <p v-else>动态创建和删除2222</p>
+
+    <div v-if="dataList.length">
+        <div>for语句</div>
+        <ul>
+            <li v-for="data in dataList">{{data}}</li>
+        </ul>
+    </div>
+    <div v-else>
+        <div>无数据</div>
+    </div>
+
+    <div v-if="w==1">
+        111111111
+    </div>
+    <div v-else-if="w==2">
+        222222222
+    </div>
+    <div v-else>
+        333333333
+    </div>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            isCreated:false,
+            dataList:[],
+            w:0
+        },
+        methods:{
+            handleClick:function () {
+                this.isCreated = !this.isCreated;
+                this.dataList = ['a','b']
+            }
+        }
+    });
+</script>
+</html>
