@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02购物车例子</title>
+</head>
+<body>
+<div id="app">
+    <div>
+        <input type="checkbox" @change="boxFunc();" v-model="isAll" id="all"/><label for="all">全选</label>
+        <ul>
+            <li v-for="data in dataList"><input type="checkbox" :value="data" v-model="dataValue" :id="data.id"/><label :for="data.id">{{data}}</label>
+            <button @click="delFunc(data)">del</button>
+                {{data.number}}
+                <button @click="addFunc(data)">add</button>
+            </li>
+        </ul>
+        <p>总金额计算:<span>{{getTotal()}}</span></p>
+    </div>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el : "#app",
+        data:{
+            isAll:false,
+            dataValue:[],
+            dataList:[{name:'商品a',price:10,number:1,id:1},{name:'商品b',price:20,number:2,id:2},{name:'商品c',price:30,number:1,id:3}],
+            total:0
+        },
+        methods:{
+            getTotal(){
+                var sum = 0;
+                // 当三个checkbox都被选中时，则全选按钮被勾选上
+                this.isAll = (this.dataValue.length==this.dataList.length)?true:false;
+                for (var i in this.dataValue) {
+                    sum += (this.dataValue[i].price*this.dataValue[i].number);
+                }
+                return sum;
+            },
+            boxFunc() {
+                if (this.isAll) {
+                    this.dataValue = this.dataList;
+                }
+                else {
+                    this.dataValue = [];
+                }
+            },
+            delFunc(e) {
+                if (e.number>1) {
+                    e.number -= 1;
+                }
+                // for (var i in this.dataValue) {
+                //     if (this.dataValue[i].id == e.id) {
+                //         this.dataValue[i].number -= 1;
+                //     }
+                // }
+            },
+            addFunc(e) {
+                e.number += 1;
+                // for (var i in this.dataValue) {
+                //     if (this.dataValue[i].id == e.id) {
+                //         this.dataValue[i].number += 1;
+                //     }
+                // }
+            }
+        }
+    });
+</script>
+</html>
