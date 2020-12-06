@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02axios</title>
+<!--    https://github.com/axios/axios-->
+    <script src="../vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="getFunc()">获取数据</button>
+    <ul>
+        <li v-for="data in dataList">{{data.name}}-{{data.age}}</li>
+    </ul>
+</div>
+</body>
+<script>
+    var app = new Vue({
+        el :"#app",
+        data:{
+            dataList:[]
+        },
+        methods:{
+            getFunc(){
+                axios.get('./test.json').then(res=>{
+                    // console.log(res.data.data)
+                    this.dataList = res.data.data
+                }).catch(err=>{
+                    console.log(err)
+                })
+            }
+        }
+    });
+</script>
+</html>

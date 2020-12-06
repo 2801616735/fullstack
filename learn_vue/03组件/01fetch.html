@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01fetch</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="getFunc()">获取数据</button>
+    <ul>
+        <li v-for="data in dataList">{{data.name}}-{{data.age}}</li>
+    </ul>
+</div>
+</body>
+<script>
+
+    // fetch("./test.json").then(function (res) {
+    //     return res.json()
+    // }).then(res=>{
+    //     console.log(res)
+    // })
+
+    var app = new Vue({
+        el :"#app",
+        data:{
+            dataList:[]
+        },
+        methods:{
+            getFunc(){
+                fetch("./test.json").then(function (res) {
+                    return res.json()
+                }).then(res=>{
+                    this.dataList = res.data;
+                })
+            }
+        }
+    });
+</script>
+</html>
