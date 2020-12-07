@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03计算属性</title>
+</head>
+<body>
+<div id="app">
+    {{myName.substring(0,1).toUpperCase()+myName.substring(1)}}
+    <p>计算属性:{{getMyName}}</p>
+    <p>计算方法:{{getMyNameMethod()}}</p>
+    <p>计算属性:{{getMyName}}</p>
+    <p>计算方法:{{getMyNameMethod()}}</p>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el:"#app",
+        data:{
+            myName:"xiaobei"
+        },
+        methods:{
+            getMyNameMethod(){
+                console.log("计算方法getMyNameMethod->调用")
+                return this.myName.substring(0,1).toUpperCase()+this.myName.substring(1)
+            }
+        },
+        computed:{
+            getMyName(){
+                console.log("计算属性getMyName->调用")
+                return this.myName.substring(0,1).toUpperCase()+this.myName.substring(1)
+            }
+        }
+    });
+    // 计算属性比计算方法的性能要高，因为计算属性所得到的结果会被缓存
+</script>
+</html>

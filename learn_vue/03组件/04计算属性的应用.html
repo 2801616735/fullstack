@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04计算属性的应用</title>
+</head>
+<body>
+<div id="app">
+    <p>搜索内容:<input type="text" v-model="myText"/></p>
+    <ul>
+        <li v-for="data in getMyText">{{data}}</li>
+    </ul>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el :"#app",
+        data:{
+            myText:"",
+            dataList:["aaa","bbb","ccc","abc","acd"]
+        },
+        computed:{
+            getMyText(){
+                return this.dataList.filter(item=>item.indexOf(this.myText)>-1)
+            }
+        }
+    });
+</script>
+</html>
