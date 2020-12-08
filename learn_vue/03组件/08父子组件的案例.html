@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>03父子组件的案例</title>
+</head>
+<body>
+<div id="app">
+    <button @click="isShow=!isShow">点击</button>
+    <sidebar v-show="isShow"></sidebar>
+    <navbar @myevent="showFunc"></navbar>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    Vue.component("navbar",{
+        template:`<div><button @click="butFunc">按钮</button></div>`,
+        methods:{
+            butFunc(){
+                console.log("按钮点击")
+                this.$emit("myevent")
+            }
+        }
+    });
+    Vue.component("sidebar",{
+        template:`<div><ul>
+            <li>111111</li>
+            <li>222222</li>
+            <li>333333</li>
+            <li>444444</li>
+</ul></div>`
+    });
+
+    new Vue({
+        el :"#app",
+        data:{
+            isShow:false
+        },
+        methods:{
+            showFunc(){
+                console.log("ddd")
+                this.isShow =!this.isShow;
+            }
+        }
+    });
+</script>
+</html>
