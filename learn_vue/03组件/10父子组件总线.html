@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10父子组件总线</title>
+</head>
+<body>
+    <div id="app">
+        <author></author>
+        <user></user>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+
+    // 定义总线
+    var bus = new Vue();
+
+    Vue.component("author",{
+        template:`<div>
+    我是作者:<input type="text" v-model="text"/><input type="text" ref="text"/><button @click="send">发布</button>
+</div>`,
+        methods:{
+            send(){
+                bus.$emit("message","hello world"+this.text+this.$refs.text.value)
+            }
+        },
+        data(){
+            return {
+                text:""
+            }
+        }
+    });
+
+    Vue.component("user",{
+        template:`<div>
+    我是用户:
+</div>`,
+        mounted(){
+            bus.$on("message",(e)=>{
+                console.log("收到消息",e)
+            })
+            console.log("生命周期函数-当前组件dom创建完成之后就会被调用")
+
+        }
+    });
+
+
+    var app = new Vue({
+        el : "#app"
+    });
+</script>
+</html>

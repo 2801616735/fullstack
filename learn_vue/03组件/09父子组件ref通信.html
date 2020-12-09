@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09父子组件ref通信</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" ref="myText"/>
+        <button @click="clickFunc">按钮</button>
+        <child ref="hello"></child>
+        <button @click="clickFunc2">按钮</button>
+    </div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    // 定义全局组件
+    Vue.component("child",{
+        template:`<div>hello</div>`,
+        data(){
+            return {
+                name : "hello world."
+            }
+        },
+        methods:{
+            test() {
+                console.log("子组件child")
+            }
+        }
+    });
+
+    var app = new Vue({
+        el : "#app",
+        data : {
+
+        },
+        methods:{
+            clickFunc(){
+                console.log(this.$refs.myText.value)
+            },
+            clickFunc2(){
+                console.log(this.$refs.hello.name)
+                this.$refs.hello.test()
+            }
+        }
+    });
+</script>
+</html>
