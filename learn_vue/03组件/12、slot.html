@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12、slot</title>
+</head>
+<body>
+<div id="app">
+    <child>
+        <div>hello world.</div>
+    </child>
+    <swiper>
+        <ul>
+            <li v-for="data in dataList">{{data}}</li>
+        </ul>
+    </swiper>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    Vue.component("child",{
+        template: `<div>child
+<slot></slot>
+</div>`
+    });
+
+    Vue.component("swiper",{
+        template: `
+    <div>
+    <slot></slot>
+</div>
+`
+    })
+
+    var app = new Vue({
+        el : "#app",
+        data:{
+            dataList:["aaaaaaaaaaaaaa","bbbbbbbbbbbbbbb","cccccccccccccccccc"]
+        }
+    });
+    // slot，相当于是在子组件中占个坑，到时把子组件外的数据，传入进去
+</script>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <p>原子传父组件操作-通过事件</p>
+    <oldctf @hide="isShow=!isShow"></oldctf>
+
+    <p>slot应用</p>
+    <newctf>
+        <button @click="isShow=!isShow">点击隐藏</button>
+    </newctf>
+
+    <hr/>
+    <list v-show="isShow">
+        <ul>
+            <li v-for="data in dataList">{{data}}</li>
+        </ul>
+    </list>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    Vue.component("oldctf",{
+        template: `<div>
+<button @click="hide">点击隐藏</button>
+</div>`,
+        methods: {
+            hide(){
+                this.$emit("hide")
+            }
+        }
+    });
+
+    Vue.component("newctf",{
+        template: `<div><slot></slot></div>`
+    });
+
+    var app = new Vue({
+        el : "#app",
+        data : {
+            isShow : true,
+            dataList : ["aaaa","bbbb","cccc"]
+        }
+    });
+</script>
+</html>

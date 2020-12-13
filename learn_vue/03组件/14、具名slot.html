@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>14、具名slot</title>
+</head>
+<body>
+<div id="app">
+    <child>
+        <div slot="a">aaaaaaaaaaaaaaaaaaa</div>
+        <div slot="b">bbbbbbbbbbbbbbbbbbb</div>
+    </child>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+
+
+    var app = new Vue({
+        el : "#app",
+        components:{
+            "child":{
+                template:`
+                <div><slot name="a"></slot>child<slot name="b"></slot></div>
+                `
+            }
+        }
+    })
+</script>
+</html>
