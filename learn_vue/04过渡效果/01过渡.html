@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01过渡</title>
+    <style>
+        .one-enter-active,.one-leave-active {
+            transition: all 1.5s;
+        }
+        .one-enter,.one-leave-to {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        .two-enter-active {
+            animation: bounce-in .5s;
+        }
+        .two-leave-active {
+            animation: bounce-in .5s reverse;
+        }
+        @keyframes bounce-in {
+            0%{
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100%{
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p>动画1</p>
+    <button @click="butOne">按钮1</button>
+    <transition name="one">
+        <p v-show="one">111111</p>
+    </transition>
+
+    <p>动画2</p>
+    <button @click="butTwo">按钮2</button>
+    <transition name="two">
+        <p v-show="two">222222</p>
+    </transition>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el : "#app",
+        data : {
+            one : false,
+            two : false
+        },
+        methods:{
+            butOne:function(){
+                this.one = !this.one;
+            },
+            butTwo(){
+                this.two = !this.two;
+            }
+        }
+    });
+</script>
+</html>
