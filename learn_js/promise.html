@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise</title>
+</head>
+<body>
+<h1>promise</h1>
+</body>
+<script>
+function f1(resolve,reject) {
+    console.log("this is f1()",Date.now());
+    setTimeout(function(){resolve("hello")},5000);
+}
+
+function f2(msg) {
+    console.log("this is f2()",msg,Date.now());
+}
+
+(new Promise(f1)).then(f2).then(console.log);
+</script>
+</html>
