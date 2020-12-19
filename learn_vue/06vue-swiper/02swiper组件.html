@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02swiper组件</title>
+    <link href="../lib/swiper/swiper.min.css" rel="stylesheet">
+    <script src="../lib/swiper/swiper.min.js"></script>
+    <style>
+        .swiper-container{
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <p>自己封装的</p>
+    <swiper></swiper>
+    <hr/>
+    <p>教程的</p>
+    <swiper2 :key="dataList.length">
+        <div class="swiper-slide" v-for="data in dataList">{{data}}</div>
+    </swiper2>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    Vue.component("swiper",{
+        template:`<div class="swiper-container one">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="data in dataList">{{data}}</div>
+        </div>
+        <div class="swiper-pagination onep"></div>
+    </div>`,
+        data(){
+            return {
+                dataList: []
+            }
+        },
+        mounted(){
+            var that = this;
+            setTimeout(function(){
+                that.dataList = ["111111111","2222222222","33333333333"];
+            },2000)
+        },
+        updated(){
+            console.log('dddddddddddd')
+            new Swiper ('.one', {
+                loop: true, // 循环模式选项
+                // 如果需要分页器
+                pagination: {
+                    el: '.onep',
+                },
+            })
+        }
+    });
+
+    Vue.component("swiper2",{
+        template:`<div class="swiper-container two">
+        <div class="swiper-wrapper">
+            <slot></slot>
+        </div>
+        <div class="swiper-pagination twop"></div>
+    </div>`,
+        mounted() {
+            console.log('swiper2')
+            new Swiper ('.two', {
+                loop: true, // 循环模式选项
+                // 如果需要分页器
+                pagination: {
+                    el: '.twop',
+                },
+            })
+        }
+    });
+
+    var app = new Vue({
+        el : "#app",
+        data:{
+            dataList:[]
+        },
+        mounted() {
+            var that = this;
+            setTimeout(()=>{
+                that.dataList = ["222222222222","3333333333333","4444444444444444444"];
+            },2000)
+        }
+    });
+</script>
+</html>

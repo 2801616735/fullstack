@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01自定义指令</title>
+<!--    操作底层dom-->
+</head>
+<body>
+<div id="app">
+    <div v-hello>hello world.</div>
+    <div v-hello="'red'">hello world.</div>
+    <div v-hello="'yellow'">hello world.</div>
+    <div v-hello="mycolor">hello world.</div>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    Vue.directive("hello",{
+        // 指令生命周期,该方法只能被执行一次
+        inserted(el,color) {
+            // el 是vue传入的dom节点
+            console.log(el,typeof color.value)
+            if (typeof color.value == "undefined") {
+                el.style.background = ""
+            } else {
+                el.style.background = color.value
+            }
+        },
+        // 指令绑定的变量改变时触发
+        update(el,color) {
+            // el 是vue传入的dom节点
+            console.log(el,typeof color.value)
+            if (typeof color.value == "undefined") {
+                el.style.background = ""
+            } else {
+                el.style.background = color.value
+            }
+        }
+    })
+
+    var app = new Vue({
+        el : "#app",
+        data:{
+            mycolor : "blue"
+        }
+    });
+</script>
+</html>

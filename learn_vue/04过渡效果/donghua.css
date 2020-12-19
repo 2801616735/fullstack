@@ -1,0 +1,23 @@
+.one-enter-active,.one-leave-active {
+    transition: all 1.5s;
+}
+.one-enter,.one-leave-to {
+    opacity: 0;
+    transform: translateX(100px);
+}
+.two-enter-active {
+    animation: bounce-in .5s;
+}
+.two-leave-active {
+    animation: bounce-in .5s reverse;
+}
+@keyframes bounce-in {
+    0%{
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+}

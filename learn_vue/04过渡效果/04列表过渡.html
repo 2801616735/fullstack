@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04列表过渡</title>
+    <link href="donghua.css" rel="stylesheet">
+    <style>
+        html,body{
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <input type="text" v-model="mytext"/>{{mytext}}
+    <button @click="addFunc">添加</button>
+
+    <transition-group tag="ul" name="one">
+        <li v-for="(data,index) in dataList" :key="data">
+            {{data}}<button @click="delFunc(index)">删除</button></li>
+    </transition-group>
+
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el : "#app",
+        data : {
+            dataList : [],
+            mytext : ""
+        },
+        methods: {
+            addFunc() {
+                this.dataList.push(this.mytext)
+            },
+            delFunc(index) {
+                this.dataList.splice(index,1)
+            }
+        }
+    });
+</script>
+</html>

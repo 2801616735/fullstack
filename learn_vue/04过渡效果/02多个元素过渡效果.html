@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02多个元素过渡效果</title>
+    <link href="donghua.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+    <p>动画1</p>
+    <button @click="butOne">按钮1</button>
+<!--    transition只能包含单个标签-->
+    <transition name="one">
+        <p v-show="one">111111</p>
+        <p v-show="one">222222</p>
+    </transition>
+
+    <p>动画2</p>
+    <button @click="butTwo">按钮2</button>
+    <transition name="two" mode="in-out">
+        <p v-if="two">111111</p>
+        <div v-else>222222</div>
+<!--        如果都是p标签则不会出现动画效果，则是因为操作虚拟dom的diff算法所导致，即是相同标签，则直接替换其内容即可，不会重新生成dom节点-->
+    </transition>
+    <p>动画3</p>
+    <button @click="butThree">按钮2</button>
+    <transition name="two" mode="out-in">
+        <p v-if="three" key="1">111111</p>
+        <p v-else key="2">222222</p>
+<!--         增加key值，绕过操作虚拟dom的diff算法-->
+    </transition>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el : "#app",
+        data : {
+            one : false,
+            two : false,
+            three : false
+        },
+        methods:{
+            butOne:function(){
+                this.one = !this.one;
+            },
+            butTwo(){
+                this.two = !this.two;
+            },
+            butThree(){
+                this.three = !this.three;
+            }
+        }
+    });
+</script>
+</html>

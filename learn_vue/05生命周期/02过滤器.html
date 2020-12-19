@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02过滤器</title>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="(data,index) in dataList" :key="data.id">
+            {{data.id}}-{{data.age}}-{{data.name|checkName}}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    // 定义过滤器
+    Vue.filter("checkName",function(data){
+        return "good->"+data
+    });
+
+    var app = new Vue({
+        el : "#app",
+        data: {
+            dataList:[]
+        },
+        // 当标签渲染完毕，触发
+        mounted() {
+            var that = this;
+            axios.get('./test.json').then(res=>{
+                that.dataList = res.data.data;
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01vue-swiper</title>
+    <link href="../lib/swiper/swiper.min.css" rel="stylesheet">
+    <script src="../lib/swiper/swiper.min.js"></script>
+    <style>
+        .swiper-container {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="data in dataList">{{data}}</div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+</body>
+<script src="../vue.js"></script>
+<script>
+    var app = new Vue({
+        el : "#app",
+        data : {
+            dataList:[]
+        },
+        mounted() {
+            var that = this;
+            setTimeout(function(){
+                that.dataList = ["111111111","2222222222","33333333333"];
+                // 添加在这里，则无法生效，理由是Swiper初始化过早
+                // new Swiper ('.swiper-container', {
+                //     loop: true, // 循环模式选项
+                //     // 如果需要分页器
+                //     pagination: {
+                //         el: '.swiper-pagination',
+                //     },
+                // })
+            },2000)
+        },
+        updated() {
+            new Swiper ('.swiper-container', {
+                loop: true, // 循环模式选项
+                // 如果需要分页器
+                pagination: {
+                    el: '.swiper-pagination',
+                },
+            })
+        }
+    });
+</script>
+</html>
