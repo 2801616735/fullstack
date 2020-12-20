@@ -1,2 +1,4 @@
 .DS_Store
 .idea
+learn-vuecli/node_modules
+learn-vuecli/dist
